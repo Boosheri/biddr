@@ -26,6 +26,8 @@ export class AuctionIndexPage extends Component {
           {this.state.auctions.map(auction => (
             <li key={auction.id}>
               <Link to={`/auctions/${auction.id}`}>{auction.title}</Link>{" "}
+              <br />
+              Posted on {auction.created_at}
             </li>
           ))}
         </ul>
