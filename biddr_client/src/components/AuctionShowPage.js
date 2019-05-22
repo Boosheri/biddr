@@ -1,29 +1,39 @@
 import React, { Component } from "react";
-// import { BidList } from "./BidList";
 import { AuctionDetails } from "./AuctionDetails";
 import { Auction } from "../api/auction";
-import { Link } from "react-router-dom";
+import { Bid } from "../api/bid";
+import BidList from "./BidList";
+import { BidNew } from "./BidNew";
 
-// To structure our application, we will create components
-// that simulate the pages of web application. These are meant
-// to replace the various pages rendered by the routes of our rails server.
 export class AuctionShowPage extends Component {
   constructor(props) {
-    // When using a constructor in a class-based
-    // component, you must call the `Component` class'
-    // constructor with `super` passing it the `props`.
+
     super(props);
 
     this.state = {
-      auction: null
+      auction: null,
+      bids: []
     };
-  }
+    
+}
 
-  componentDidMount() {
-    // Components rendered by the <Route> component
-    // are passed three props: history, location and match.
+    createBid(params) {
+        Bid.create(params).then( async (data) => {
+            let auction = await Object.assign({}, this.state.auction);
+            auction.bids = data;
+            this.setState({ auction });
+        // if (!data.errors) {
+        //     this.props.history.push(`/auctions/${data.id}`);
+        // } else {
+        //     this.setState({
+        //     errors: data.errors
+        //     });
+        // }
+        });
+    }
 
-    // `match` holds a property that contains a URL's params.
+    componentDidMount() {
+
     const id = this.props.match.params.id;
 
     Auction.one(id).then(auction => {
@@ -41,16 +51,21 @@ export class AuctionShowPage extends Component {
           <h2>Auction doesn't exist!</h2>
         </main>
       );
-    }
+    };
 
     return (
-      <main className="Page">
+      <div className="Page">
         <AuctionDetails {...this.state.auction} />
-
-        {/* <h2>Bids</h2>
+        <br />
+        <BidNew
+            onSubmit={params => this.createBid(params)}
+            auctionId={this.state.auction.id}
+        />
+        <h3>Previous Bids</h3>
         <BidList
-        /> */}
-      </main>
+            auction={this.state.auction}
+        />
+      </div>
     );
   }
 }

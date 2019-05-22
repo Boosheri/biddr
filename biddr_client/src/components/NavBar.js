@@ -23,6 +23,11 @@ export function NavBar(props) {
         <React.Fragment>
           
           <span>Hello {currentUser.first_name}|</span>
+
+          <NavLink exact to="/auctions/new">
+            New Auction|
+          </NavLink>
+          
           <NavLink onClick={handleSignout} exact to="/">
             Sign Out
           </NavLink>

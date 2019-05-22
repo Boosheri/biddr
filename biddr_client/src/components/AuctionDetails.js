@@ -9,7 +9,19 @@ export function AuctionDetails(props) {
         <br />
       </p>
       <p>
-        <small>Created at {props.created_at}</small>
+        Current Price: ${props.current_price}
+        <br />
+      </p>
+      <p>
+        Reserve Price: ${props.reserve_price}
+        <br />
+      </p>
+      <p>
+        Ends At: {props.ends_at}
+        <br />
+      </p>
+      <p>
+        <small>Created at: {props.created_at}</small>
       </p>
     </div>
   );

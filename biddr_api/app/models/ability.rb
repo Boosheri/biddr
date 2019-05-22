@@ -14,7 +14,7 @@ class Ability
     auction.user == user
   end
   
-  can(:crud, Answer) do |bid|
+  can(:crud, Bid) do |bid|
     bid.user == user || bid.question.user == user
   end
   

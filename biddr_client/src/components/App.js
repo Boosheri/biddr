@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { AuctionIndexPage } from "./AuctionIndexPage";
 import { AuctionShowPage } from "./AuctionShowPage";
+import { AuctionNewPage } from "./AuctionNewPage";
 import { WelcomePage } from "./WelcomePage";
 import { NavBar } from "./NavBar";
 import { User } from "../api/user";
@@ -67,7 +68,10 @@ class App extends Component {
 
             <Route exact path="/auctions" component={AuctionIndexPage} />
             
+            <Route exact path="/auctions/new" component={AuctionNewPage} />
+            
             <Route exact path="/auctions/:id" component={AuctionShowPage} />
+
           </Switch>
         </div>
       </BrowserRouter>
